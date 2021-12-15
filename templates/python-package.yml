@@ -1,0 +1,12 @@
+
+build-package:
+  script:
+    - pip install twine
+    - python setup.py sdist bdist_wheel
+    - >
+      TWINE_USERNAME=${CI_PYPI_REPOSITORY_USERNAME}
+      TWINE_PASSWORD=${CI_PYPI_REPOSITORY_PASSWORD}
+     python -m twine upload --verbose
+      --repository-url ${CI_PYPI_REPOSITORY_URL}
+      dist/*
+
